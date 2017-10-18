@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreTodo.Data;
 using AspNetCoreTodo.Models;
 using AspNetCoreTodo.Services;
+using AspNetCoreTodoPOC.Services;
 
 namespace AspNetCoreTodo
 {
@@ -36,7 +37,7 @@ namespace AspNetCoreTodo
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddScoped<ITodoItemService, FakeTodoItemService>();
+            services.AddScoped<ITodoItemService, TodoItemService>();
 
             services.AddMvc();
         }

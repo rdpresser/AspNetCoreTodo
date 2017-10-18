@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AspNetCoreTodo.Models;
 using AspNetCoreTodo.Services;
 using Microsoft.AspNetCore.Mvc;
+using AspNetCoreTodoPOC.Models;
 
 namespace AspNetCoreTodo.Controllers
 {
@@ -28,6 +29,22 @@ namespace AspNetCoreTodo.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<IActionResult> AddItem(NewTodoItem newItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var successful = await _todoItemService.AddItemAsync(newItem);
+            if (!successful)
+            {
+                return BadRequest(new { error = "Could not add item" });
+            }
+
+            return Ok();
         }
     }
 }
